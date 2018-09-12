@@ -14,10 +14,6 @@ RUN R --no-site-file -f install.R &&  \
     chmod -R 755 /usr/local/lib/R/library && \
     chmod -R 755 /usr/local/lib/R/site-library
 
-COPY Rprofile.site /Rprofile.site.tmp
-RUN dos2unix /Rprofile.site.tmp && \
-    cat /Rprofile.site.tmp >> /usr/local/lib/R/etc/Rprofile.site && \
-    rm /Rprofile.site.tmp
 RUN echo "R_LIBS_USER=~/R/$(R --version | grep -Eo '[0-9]+[.]+[0-9]+')/library" >> /usr/local/lib/R/etc/Renviron
 
 COPY cleanupSessionFiles.sh /
